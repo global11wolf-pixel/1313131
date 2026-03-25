@@ -15,6 +15,39 @@ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 local Library = {}
 Library.Tabs = {}
 Library.CurrentTab = nil
+Library.Containers = {}
+
+-- Draggable function (defined early so it can be used)
+local function MakeDraggable(frame)
+    local dragging = false
+    local dragInput, mousePos, framePos
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            mousePos = input.Position
+            framePos = frame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
+            local delta = input.Position - mousePos
+            frame.Position = UDim2.new(
+                framePos.X.Scale,
+                framePos.X.Offset + delta.X,
+                framePos.Y.Scale,
+                framePos.Y.Offset + delta.Y
+            )
+        end
+    end)
+end
 
     local watermark = Instance.new("Frame")
     watermark.Name = "watermark"
@@ -399,38 +432,6 @@ Library.CurrentTab = nil
         TextLabel_3.Parent = notification_name
     notification_name.Parent = ScreenGui
 
--- Draggable function
-local function MakeDraggable(frame)
-    local dragging = false
-    local dragInput, mousePos, framePos
-
-    frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = true
-            mousePos = input.Position
-            framePos = frame.Position
-
-            input.Changed:Connect(function()
-                if input.UserInputState == Enum.UserInputState.End then
-                    dragging = false
-                end
-            end)
-        end
-    end)
-
-    UserInputService.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
-            local delta = input.Position - mousePos
-            frame.Position = UDim2.new(
-                framePos.X.Scale,
-                framePos.X.Offset + delta.X,
-                framePos.Y.Scale,
-                framePos.Y.Offset + delta.Y
-            )
-        end
-    end)
-end
-
 -- Make main GUI draggable
 MakeDraggable(main_gui)
 
@@ -663,6 +664,11 @@ end
 AddListLayout(the_left_tab)
 AddListLayout(the_middle_tab)
 AddListLayout(the_right_tab)
+
+-- Store containers in Library for external access
+Library.Containers.LeftTab = the_left_tab
+Library.Containers.MiddleTab = the_middle_tab
+Library.Containers.RightTab = the_right_tab
 
 -- Example components (you can remove these)
 Library:CreateToggle(the_left_tab, "Enable Aimbot", false, function(state)
