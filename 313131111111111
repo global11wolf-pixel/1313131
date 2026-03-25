@@ -1,0 +1,712 @@
+-- Fluent UI Library
+-- Enhanced version with full functionality
+
+local Player = game:GetService("Players").LocalPlayer
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "FluentUI"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- Library table
+local Library = {}
+Library.Tabs = {}
+Library.CurrentTab = nil
+
+    local watermark = Instance.new("Frame")
+    watermark.Name = "watermark"
+    watermark.Size = UDim2.new(0, 272, 0, 26)
+    watermark.Position = UDim2.new(0.12863434851169586, 0, 0.02081051468849182, 0)
+    watermark.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+    watermark.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    watermark.BorderSizePixel = 0
+    watermark.AnchorPoint = Vector2.new(0, 0)
+
+        local UICorner = Instance.new("UICorner")
+        UICorner.Parent = watermark
+
+        local TextLabel = Instance.new("TextLabel")
+        TextLabel.Size = UDim2.new(0, 255, 0, 26)
+        TextLabel.Position = UDim2.new(0.029411764815449715, 0, 0, 0)
+        TextLabel.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+        TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        TextLabel.BorderSizePixel = 0
+        TextLabel.Text = "fluent Public | Rost Alpha | Exec: Name exec"
+        TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel.TextSize = 14
+        TextLabel.Font = Enum.Font.SourceSansBold
+        TextLabel.AnchorPoint = Vector2.new(0, 0)
+        TextLabel.Parent = watermark
+    watermark.Parent = ScreenGui
+    
+    -- Make watermark draggable
+    MakeDraggable(watermark)
+    
+    -- Update watermark with FPS
+    spawn(function()
+        local lastTime = tick()
+        local fps = 0
+        
+        RunService.RenderStepped:Connect(function()
+            local currentTime = tick()
+            fps = math.floor(1 / (currentTime - lastTime))
+            lastTime = currentTime
+            
+            TextLabel.Text = string.format("fluent Public | FPS: %d | Ping: %dms", 
+                fps, 
+                math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())
+            )
+        end)
+    end)
+
+    local main_gui = Instance.new("Frame")
+    main_gui.Name = "main gui"
+    main_gui.Size = UDim2.new(0, 432, 0, 393)
+    main_gui.Position = UDim2.new(0.2773512899875641, 0, 0.44797369837760925, 0)
+    main_gui.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+    main_gui.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    main_gui.BorderSizePixel = 0
+    main_gui.AnchorPoint = Vector2.new(0, 0)
+
+        local UICorner_2 = Instance.new("UICorner")
+        UICorner_2.Parent = main_gui
+
+        local TAB_RAZDEL = Instance.new("Frame")
+        TAB_RAZDEL.Name = "TAB_RAZDEL"
+        TAB_RAZDEL.Size = UDim2.new(0, 106, 0, 393)
+        TAB_RAZDEL.Position = UDim2.new(-0.22300408780574799, 0, -0.0009647592669352889, 0)
+        TAB_RAZDEL.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+        TAB_RAZDEL.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        TAB_RAZDEL.BorderSizePixel = 0
+        TAB_RAZDEL.AnchorPoint = Vector2.new(0, 0)
+
+            local UICorner_3 = Instance.new("UICorner")
+            UICorner_3.Parent = TAB_RAZDEL
+
+            local TabMenu = Instance.new("Frame")
+            TabMenu.Name = "TabMenu"
+            TabMenu.Size = UDim2.new(0, 92, 0, 379)
+            TabMenu.Position = UDim2.new(0.05861447751522064, 0, 0.01781170442700386, 0)
+            TabMenu.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+            TabMenu.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            TabMenu.BorderSizePixel = 0
+            TabMenu.AnchorPoint = Vector2.new(0, 0)
+
+                local UICorner_4 = Instance.new("UICorner")
+                UICorner_4.Parent = TabMenu
+
+                local Name_tab = Instance.new("Folder")
+                Name_tab.Name = "Name_tab"
+
+                    local tab_visuals = Instance.new("Frame")
+                    tab_visuals.Name = "tab_visuals"
+                    tab_visuals.Size = UDim2.new(0, 74, 0, 61)
+                    tab_visuals.Position = UDim2.new(0.09782608598470688, 0, 0.39677876234054565, 0)
+                    tab_visuals.BackgroundColor3 = Color3.fromRGB(65, 65, 63)
+                    tab_visuals.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                    tab_visuals.BorderSizePixel = 0
+                    tab_visuals.AnchorPoint = Vector2.new(0, 0)
+
+                        local name_tab_tex = Instance.new("TextLabel")
+                        name_tab_tex.Name = "name_tab_tex"
+                        name_tab_tex.Size = UDim2.new(0, 83, 0, 24)
+                        name_tab_tex.Position = UDim2.new(-0.12450182437896729, 0, 0.868852436542511, 0)
+                        name_tab_tex.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                        name_tab_tex.BorderColor3 = Color3.fromRGB(255, 255, 255)
+                        name_tab_tex.BorderSizePixel = 0
+                        name_tab_tex.Text = "visuals"
+                        name_tab_tex.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        name_tab_tex.TextSize = 14
+                        name_tab_tex.Font = Enum.Font.SourceSansBold
+                        name_tab_tex.AnchorPoint = Vector2.new(0, 0)
+
+                            local UICorner_5 = Instance.new("UICorner")
+                            UICorner_5.Parent = name_tab_tex
+
+                            local ImageButton = Instance.new("ImageButton")
+                            ImageButton.Size = UDim2.new(0, 74, 0, 61)
+                            ImageButton.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
+                            ImageButton.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                            ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                            ImageButton.BorderSizePixel = 0
+                            ImageButton.Image = "rbxassetid://91157903643590"
+                            ImageButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
+                            ImageButton.AnchorPoint = Vector2.new(0, 0)
+                            ImageButton.Parent = name_tab_tex
+                        name_tab_tex.Parent = tab_visuals
+                    tab_visuals.Parent = Name_tab
+
+                    local tab_misc = Instance.new("Frame")
+                    tab_misc.Name = "tab_misc"
+                    tab_misc.Size = UDim2.new(0, 74, 0, 61)
+                    tab_misc.Position = UDim2.new(0.09782608598470688, 0, 0.6025835275650024, 0)
+                    tab_misc.BackgroundColor3 = Color3.fromRGB(65, 65, 63)
+                    tab_misc.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                    tab_misc.BorderSizePixel = 0
+                    tab_misc.AnchorPoint = Vector2.new(0, 0)
+
+                        local name_tab_tex_2 = Instance.new("TextLabel")
+                        name_tab_tex_2.Name = "name_tab_tex"
+                        name_tab_tex_2.Size = UDim2.new(0, 83, 0, 24)
+                        name_tab_tex_2.Position = UDim2.new(-0.12450182437896729, 0, 0.868852436542511, 0)
+                        name_tab_tex_2.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                        name_tab_tex_2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+                        name_tab_tex_2.BorderSizePixel = 0
+                        name_tab_tex_2.Text = "misc"
+                        name_tab_tex_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        name_tab_tex_2.TextSize = 14
+                        name_tab_tex_2.Font = Enum.Font.SourceSansBold
+                        name_tab_tex_2.AnchorPoint = Vector2.new(0, 0)
+
+                            local UICorner_6 = Instance.new("UICorner")
+                            UICorner_6.Parent = name_tab_tex_2
+
+                            local ImageButton_2 = Instance.new("ImageButton")
+                            ImageButton_2.Size = UDim2.new(0, 74, 0, 61)
+                            ImageButton_2.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
+                            ImageButton_2.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                            ImageButton_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                            ImageButton_2.BorderSizePixel = 0
+                            ImageButton_2.Image = "rbxassetid://101005170699126"
+                            ImageButton_2.ImageColor3 = Color3.fromRGB(255, 255, 255)
+                            ImageButton_2.AnchorPoint = Vector2.new(0, 0)
+                            ImageButton_2.Parent = name_tab_tex_2
+                        name_tab_tex_2.Parent = tab_misc
+                    tab_misc.Parent = Name_tab
+
+                    local tab_settings = Instance.new("Frame")
+                    tab_settings.Name = "tab_settings"
+                    tab_settings.Size = UDim2.new(0, 74, 0, 61)
+                    tab_settings.Position = UDim2.new(0.09782608598470688, 0, 0.7951956391334534, 0)
+                    tab_settings.BackgroundColor3 = Color3.fromRGB(65, 65, 63)
+                    tab_settings.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                    tab_settings.BorderSizePixel = 0
+                    tab_settings.AnchorPoint = Vector2.new(0, 0)
+
+                        local name_tab_tex_3 = Instance.new("TextLabel")
+                        name_tab_tex_3.Name = "name_tab_tex"
+                        name_tab_tex_3.Size = UDim2.new(0, 83, 0, 24)
+                        name_tab_tex_3.Position = UDim2.new(-0.12450182437896729, 0, 0.868852436542511, 0)
+                        name_tab_tex_3.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                        name_tab_tex_3.BorderColor3 = Color3.fromRGB(255, 255, 255)
+                        name_tab_tex_3.BorderSizePixel = 0
+                        name_tab_tex_3.Text = "settings"
+                        name_tab_tex_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        name_tab_tex_3.TextSize = 14
+                        name_tab_tex_3.Font = Enum.Font.SourceSansBold
+                        name_tab_tex_3.AnchorPoint = Vector2.new(0, 0)
+
+                            local UICorner_7 = Instance.new("UICorner")
+                            UICorner_7.Parent = name_tab_tex_3
+
+                            local icon_tab = Instance.new("ImageButton")
+                            icon_tab.Name = "icon_tab"
+                            icon_tab.Size = UDim2.new(0, 74, 0, 61)
+                            icon_tab.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
+                            icon_tab.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                            icon_tab.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                            icon_tab.BorderSizePixel = 0
+                            icon_tab.Image = "rbxassetid://105258813960131"
+                            icon_tab.ImageColor3 = Color3.fromRGB(255, 255, 255)
+                            icon_tab.AnchorPoint = Vector2.new(0, 0)
+                            icon_tab.Parent = name_tab_tex_3
+                        name_tab_tex_3.Parent = tab_settings
+                    tab_settings.Parent = Name_tab
+
+                    local tab_aim = Instance.new("Frame")
+                    tab_aim.Name = "tab_aim"
+                    tab_aim.Size = UDim2.new(0, 74, 0, 61)
+                    tab_aim.Position = UDim2.new(0.09782608598470688, 0, 0.20152810215950012, 0)
+                    tab_aim.BackgroundColor3 = Color3.fromRGB(65, 65, 63)
+                    tab_aim.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                    tab_aim.BorderSizePixel = 0
+                    tab_aim.AnchorPoint = Vector2.new(0, 0)
+
+                        local name_tab_tex_4 = Instance.new("TextLabel")
+                        name_tab_tex_4.Name = "name_tab_tex"
+                        name_tab_tex_4.Size = UDim2.new(0, 83, 0, 24)
+                        name_tab_tex_4.Position = UDim2.new(-0.12450182437896729, 0, 0.868852436542511, 0)
+                        name_tab_tex_4.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                        name_tab_tex_4.BorderColor3 = Color3.fromRGB(255, 255, 255)
+                        name_tab_tex_4.BorderSizePixel = 0
+                        name_tab_tex_4.Text = "aimbot"
+                        name_tab_tex_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        name_tab_tex_4.TextSize = 14
+                        name_tab_tex_4.Font = Enum.Font.SourceSansBold
+                        name_tab_tex_4.AnchorPoint = Vector2.new(0, 0)
+
+                            local UICorner_8 = Instance.new("UICorner")
+                            UICorner_8.Parent = name_tab_tex_4
+
+                            local icon_tab_2 = Instance.new("ImageButton")
+                            icon_tab_2.Name = "icon_tab"
+                            icon_tab_2.Size = UDim2.new(0, 74, 0, 61)
+                            icon_tab_2.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
+                            icon_tab_2.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                            icon_tab_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                            icon_tab_2.BorderSizePixel = 0
+                            icon_tab_2.Image = "rbxassetid://103785967336737"
+                            icon_tab_2.ImageColor3 = Color3.fromRGB(255, 255, 255)
+                            icon_tab_2.AnchorPoint = Vector2.new(0, 0)
+                            icon_tab_2.Parent = name_tab_tex_4
+                        name_tab_tex_4.Parent = tab_aim
+                    tab_aim.Parent = Name_tab
+
+                    local icon_tab_3 = Instance.new("ImageButton")
+                    icon_tab_3.Name = "icon_tab"
+                    icon_tab_3.Size = UDim2.new(0, 74, 0, 61)
+                    icon_tab_3.Position = UDim2.new(0.09782608598470688, 0, -0.0026385225355625153, 0)
+                    icon_tab_3.BackgroundColor3 = Color3.fromRGB(45, 44, 43)
+                    icon_tab_3.BorderColor3 = Color3.fromRGB(45, 45, 44)
+                    icon_tab_3.BorderSizePixel = 0
+                    icon_tab_3.Image = "rbxassetid://120332676651796"
+                    icon_tab_3.ImageColor3 = Color3.fromRGB(45, 45, 44)
+                    icon_tab_3.AnchorPoint = Vector2.new(0, 0)
+                    icon_tab_3.Parent = Name_tab
+                Name_tab.Parent = TabMenu
+            TabMenu.Parent = TAB_RAZDEL
+        TAB_RAZDEL.Parent = main_gui
+
+        local Frame = Instance.new("Frame")
+        Frame.Size = UDim2.new(0, 409, 0, 380)
+        Frame.Position = UDim2.new(0.03625516593456268, 0, 0.015267175622284412, 0)
+        Frame.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+        Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        Frame.BorderSizePixel = 0
+        Frame.AnchorPoint = Vector2.new(0, 0)
+
+            local UICorner_9 = Instance.new("UICorner")
+            UICorner_9.Parent = Frame
+
+            local CloseButton = Instance.new("TextButton")
+            CloseButton.Name = "CloseButton"
+            CloseButton.Size = UDim2.new(0, 25, 0, 25)
+            CloseButton.Position = UDim2.new(1, -30, 0, 5)
+            CloseButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+            CloseButton.BorderSizePixel = 0
+            CloseButton.Text = "X"
+            CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            CloseButton.TextSize = 16
+            CloseButton.Font = Enum.Font.SourceSansBold
+            CloseButton.Parent = Frame
+            
+            local CloseCorner = Instance.new("UICorner")
+            CloseCorner.CornerRadius = UDim.new(0, 4)
+            CloseCorner.Parent = CloseButton
+            
+            CloseButton.MouseButton1Click:Connect(function()
+                main_gui.Visible = not main_gui.Visible
+            end)
+
+            local the_left_tab = Instance.new("Frame")
+            the_left_tab.Name = "the left tab"
+            the_left_tab.Size = UDim2.new(0, 123, 0, 363)
+            the_left_tab.Position = UDim2.new(0.024449877440929413, 0, 0.018421052023768425, 0)
+            the_left_tab.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+            the_left_tab.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            the_left_tab.BorderSizePixel = 0
+            the_left_tab.AnchorPoint = Vector2.new(0, 0)
+
+                local UICorner_10 = Instance.new("UICorner")
+                UICorner_10.Parent = the_left_tab
+
+                local Frame_2 = Instance.new("Frame")
+                Frame_2.Size = UDim2.new(0, 123, 0, 29)
+                Frame_2.Position = UDim2.new(0, 0, 0, 0)
+                Frame_2.BackgroundColor3 = Color3.fromRGB(116, 116, 116)
+                Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                Frame_2.BorderSizePixel = 0
+                Frame_2.AnchorPoint = Vector2.new(0, 0)
+
+                    local UICorner_11 = Instance.new("UICorner")
+                    UICorner_11.Parent = Frame_2
+
+                    local TextLabel_2 = Instance.new("TextLabel")
+                    TextLabel_2.Size = UDim2.new(0, 55, 0, 18)
+                    TextLabel_2.Position = UDim2.new(0, 0, 0, 0)
+                    TextLabel_2.BackgroundColor3 = Color3.fromRGB(116, 116, 116)
+                    TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                    TextLabel_2.BorderSizePixel = 0
+                    TextLabel_2.Text = "aim salent"
+                    TextLabel_2.TextColor3 = Color3.fromRGB(0, 0, 0)
+                    TextLabel_2.TextSize = 14
+                    TextLabel_2.Font = Enum.Font.SourceSansBold
+                    TextLabel_2.AnchorPoint = Vector2.new(0, 0)
+
+                        local UICorner_12 = Instance.new("UICorner")
+                        UICorner_12.Parent = TextLabel_2
+                    TextLabel_2.Parent = Frame_2
+                Frame_2.Parent = the_left_tab
+            the_left_tab.Parent = Frame
+
+            local the_middle_tab = Instance.new("Frame")
+            the_middle_tab.Name = "the middle tab"
+            the_middle_tab.Size = UDim2.new(0, 123, 0, 363)
+            the_middle_tab.Position = UDim2.new(0.34963324666023254, 0, 0.018421052023768425, 0)
+            the_middle_tab.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+            the_middle_tab.BorderColor3 = Color3.fromRGB(38, 38, 38)
+            the_middle_tab.BorderSizePixel = 0
+            the_middle_tab.AnchorPoint = Vector2.new(0, 0)
+
+                local UICorner_13 = Instance.new("UICorner")
+                UICorner_13.Parent = the_middle_tab
+            the_middle_tab.Parent = Frame
+
+            local the_right_tab = Instance.new("Frame")
+            the_right_tab.Name = "the right tab"
+            the_right_tab.Size = UDim2.new(0, 123, 0, 363)
+            the_right_tab.Position = UDim2.new(0.6723716259002686, 0, 0.018421052023768425, 0)
+            the_right_tab.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+            the_right_tab.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            the_right_tab.BorderSizePixel = 0
+            the_right_tab.AnchorPoint = Vector2.new(0, 0)
+
+                local UICorner_14 = Instance.new("UICorner")
+                UICorner_14.Parent = the_right_tab
+            the_right_tab.Parent = Frame
+        Frame.Parent = main_gui
+    main_gui.Parent = ScreenGui
+
+    local notification_name = Instance.new("Frame")
+    notification_name.Name = "notification_name"
+    notification_name.Size = UDim2.new(0, 173, 0, 26)
+    notification_name.Position = UDim2.new(0.813424289226532, 0, 0.8368017673492432, 0)
+    notification_name.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+    notification_name.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    notification_name.BorderSizePixel = 0
+    notification_name.AnchorPoint = Vector2.new(0, 0)
+
+        local UICorner_15 = Instance.new("UICorner")
+        UICorner_15.Parent = notification_name
+
+        local TextLabel_3 = Instance.new("TextLabel")
+        TextLabel_3.Size = UDim2.new(0, 130, 0, 26)
+        TextLabel_3.Position = UDim2.new(0.12138728052377701, 0, 0, 0)
+        TextLabel_3.BackgroundColor3 = Color3.fromRGB(49, 49, 49)
+        TextLabel_3.BorderColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel_3.BorderSizePixel = 0
+        TextLabel_3.Text = "Notification system loaded!"
+        TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel_3.TextSize = 14
+        TextLabel_3.Font = Enum.Font.SourceSansBold
+        TextLabel_3.AnchorPoint = Vector2.new(0, 0)
+
+            local UICorner_16 = Instance.new("UICorner")
+            UICorner_16.Parent = TextLabel_3
+        TextLabel_3.Parent = notification_name
+    notification_name.Parent = ScreenGui
+
+-- Draggable function
+local function MakeDraggable(frame)
+    local dragging = false
+    local dragInput, mousePos, framePos
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            mousePos = input.Position
+            framePos = frame.Position
+
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
+            local delta = input.Position - mousePos
+            frame.Position = UDim2.new(
+                framePos.X.Scale,
+                framePos.X.Offset + delta.X,
+                framePos.Y.Scale,
+                framePos.Y.Offset + delta.Y
+            )
+        end
+    end)
+end
+
+-- Make main GUI draggable
+MakeDraggable(main_gui)
+
+-- Tab switching system
+local function SwitchTab(tabName)
+    -- Hide all content frames
+    the_left_tab.Visible = false
+    the_middle_tab.Visible = false
+    the_right_tab.Visible = false
+    
+    -- Reset all tab colors
+    for _, tab in pairs(Name_tab:GetChildren()) do
+        if tab:IsA("Frame") then
+            tab.BackgroundColor3 = Color3.fromRGB(65, 65, 63)
+        end
+    end
+    
+    -- Show selected tab content
+    if tabName == "aimbot" then
+        the_left_tab.Visible = true
+        tab_aim.BackgroundColor3 = Color3.fromRGB(85, 85, 83)
+    elseif tabName == "visuals" then
+        the_middle_tab.Visible = true
+        tab_visuals.BackgroundColor3 = Color3.fromRGB(85, 85, 83)
+    elseif tabName == "misc" then
+        the_right_tab.Visible = true
+        tab_misc.BackgroundColor3 = Color3.fromRGB(85, 85, 83)
+    end
+end
+
+-- Connect tab buttons
+icon_tab_2.MouseButton1Click:Connect(function()
+    SwitchTab("aimbot")
+end)
+
+ImageButton.MouseButton1Click:Connect(function()
+    SwitchTab("visuals")
+end)
+
+ImageButton_2.MouseButton1Click:Connect(function()
+    SwitchTab("misc")
+end)
+
+-- Initialize with first tab
+SwitchTab("aimbot")
+
+-- Library functions
+function Library:CreateToggle(parent, text, default, callback)
+    callback = callback or function() end
+    local toggled = default or false
+    
+    local toggleFrame = Instance.new("Frame")
+    toggleFrame.Size = UDim2.new(0, 110, 0, 25)
+    toggleFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    toggleFrame.BorderSizePixel = 0
+    toggleFrame.Parent = parent
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 4)
+    corner.Parent = toggleFrame
+    
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0, 80, 0, 25)
+    label.Position = UDim2.new(0, 5, 0, 0)
+    label.BackgroundTransparency = 1
+    label.Text = text
+    label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    label.TextSize = 12
+    label.Font = Enum.Font.SourceSansBold
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    label.Parent = toggleFrame
+    
+    local indicator = Instance.new("Frame")
+    indicator.Size = UDim2.new(0, 15, 0, 15)
+    indicator.Position = UDim2.new(1, -20, 0.5, -7.5)
+    indicator.BackgroundColor3 = toggled and Color3.fromRGB(100, 200, 100) or Color3.fromRGB(200, 100, 100)
+    indicator.BorderSizePixel = 0
+    indicator.Parent = toggleFrame
+    
+    local indicatorCorner = Instance.new("UICorner")
+    indicatorCorner.CornerRadius = UDim.new(0, 3)
+    indicatorCorner.Parent = indicator
+    
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, 0, 1, 0)
+    button.BackgroundTransparency = 1
+    button.Text = ""
+    button.Parent = toggleFrame
+    
+    button.MouseButton1Click:Connect(function()
+        toggled = not toggled
+        TweenService:Create(indicator, TweenInfo.new(0.2), {
+            BackgroundColor3 = toggled and Color3.fromRGB(100, 200, 100) or Color3.fromRGB(200, 100, 100)
+        }):Play()
+        callback(toggled)
+    end)
+    
+    return toggleFrame
+end
+
+function Library:CreateButton(parent, text, callback)
+    callback = callback or function() end
+    
+    local buttonFrame = Instance.new("Frame")
+    buttonFrame.Size = UDim2.new(0, 110, 0, 25)
+    buttonFrame.BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+    buttonFrame.BorderSizePixel = 0
+    buttonFrame.Parent = parent
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 4)
+    corner.Parent = buttonFrame
+    
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.BackgroundTransparency = 1
+    label.Text = text
+    label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    label.TextSize = 12
+    label.Font = Enum.Font.SourceSansBold
+    label.Parent = buttonFrame
+    
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(1, 0, 1, 0)
+    button.BackgroundTransparency = 1
+    button.Text = ""
+    button.Parent = buttonFrame
+    
+    button.MouseButton1Click:Connect(function()
+        TweenService:Create(buttonFrame, TweenInfo.new(0.1), {
+            BackgroundColor3 = Color3.fromRGB(75, 75, 75)
+        }):Play()
+        wait(0.1)
+        TweenService:Create(buttonFrame, TweenInfo.new(0.1), {
+            BackgroundColor3 = Color3.fromRGB(55, 55, 55)
+        }):Play()
+        callback()
+    end)
+    
+    return buttonFrame
+end
+
+function Library:CreateSlider(parent, text, min, max, default, callback)
+    callback = callback or function() end
+    local value = default or min
+    
+    local sliderFrame = Instance.new("Frame")
+    sliderFrame.Size = UDim2.new(0, 110, 0, 35)
+    sliderFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    sliderFrame.BorderSizePixel = 0
+    sliderFrame.Parent = parent
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 4)
+    corner.Parent = sliderFrame
+    
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, -10, 0, 15)
+    label.Position = UDim2.new(0, 5, 0, 2)
+    label.BackgroundTransparency = 1
+    label.Text = text .. ": " .. value
+    label.TextColor3 = Color3.fromRGB(200, 200, 200)
+    label.TextSize = 11
+    label.Font = Enum.Font.SourceSansBold
+    label.TextXAlignment = Enum.TextXAlignment.Left
+    label.Parent = sliderFrame
+    
+    local sliderBar = Instance.new("Frame")
+    sliderBar.Size = UDim2.new(0, 100, 0, 4)
+    sliderBar.Position = UDim2.new(0, 5, 1, -10)
+    sliderBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    sliderBar.BorderSizePixel = 0
+    sliderBar.Parent = sliderFrame
+    
+    local sliderBarCorner = Instance.new("UICorner")
+    sliderBarCorner.CornerRadius = UDim.new(0, 2)
+    sliderBarCorner.Parent = sliderBar
+    
+    local sliderFill = Instance.new("Frame")
+    sliderFill.Size = UDim2.new((value - min) / (max - min), 0, 1, 0)
+    sliderFill.BackgroundColor3 = Color3.fromRGB(100, 150, 255)
+    sliderFill.BorderSizePixel = 0
+    sliderFill.Parent = sliderBar
+    
+    local sliderFillCorner = Instance.new("UICorner")
+    sliderFillCorner.CornerRadius = UDim.new(0, 2)
+    sliderFillCorner.Parent = sliderFill
+    
+    local dragging = false
+    
+    sliderBar.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+        end
+    end)
+    
+    UserInputService.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
+        end
+    end)
+    
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            local mousePos = input.Position.X
+            local barPos = sliderBar.AbsolutePosition.X
+            local barSize = sliderBar.AbsoluteSize.X
+            local relativePos = math.clamp(mousePos - barPos, 0, barSize)
+            local percentage = relativePos / barSize
+            
+            value = math.floor(min + (max - min) * percentage)
+            label.Text = text .. ": " .. value
+            sliderFill.Size = UDim2.new(percentage, 0, 1, 0)
+            callback(value)
+        end
+    end)
+    
+    return sliderFrame
+end
+
+-- Add UIListLayout to columns
+local function AddListLayout(parent)
+    local layout = Instance.new("UIListLayout")
+    layout.Padding = UDim.new(0, 5)
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+    layout.Parent = parent
+    return layout
+end
+
+AddListLayout(the_left_tab)
+AddListLayout(the_middle_tab)
+AddListLayout(the_right_tab)
+
+-- Example components (you can remove these)
+Library:CreateToggle(the_left_tab, "Enable Aimbot", false, function(state)
+    print("Aimbot:", state)
+end)
+
+Library:CreateSlider(the_left_tab, "FOV", 0, 360, 90, function(val)
+    print("FOV:", val)
+end)
+
+Library:CreateButton(the_left_tab, "Test Button", function()
+    print("Button clicked!")
+end)
+
+-- Notification system
+function Library:Notify(text, duration)
+    duration = duration or 3
+    
+    local notif = notification_name:Clone()
+    notif.TextLabel_3.Text = text
+    notif.Position = UDim2.new(1.2, 0, 0.837, 0)
+    notif.Parent = ScreenGui
+    
+    -- Slide in
+    TweenService:Create(notif, TweenInfo.new(0.3), {
+        Position = UDim2.new(0.813, 0, 0.837, 0)
+    }):Play()
+    
+    -- Wait and slide out
+    wait(duration)
+    TweenService:Create(notif, TweenInfo.new(0.3), {
+        Position = UDim2.new(1.2, 0, 0.837, 0)
+    }):Play()
+    
+    wait(0.3)
+    notif:Destroy()
+end
+
+-- Hide default notification
+notification_name.Visible = false
+
+-- Show welcome notification
+Library:Notify("Fluent UI Loaded!", 2)
+
+ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+
+return Library
