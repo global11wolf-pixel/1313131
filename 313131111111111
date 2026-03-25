@@ -159,16 +159,18 @@ end
                             local UICorner_5 = Instance.new("UICorner")
                             UICorner_5.Parent = name_tab_tex
 
-                            local ImageButton = Instance.new("ImageButton")
-                            ImageButton.Size = UDim2.new(0, 74, 0, 61)
-                            ImageButton.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
-                            ImageButton.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
-                            ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-                            ImageButton.BorderSizePixel = 0
-                            ImageButton.Image = "rbxassetid://91157903643590"
-                            ImageButton.ImageColor3 = Color3.fromRGB(255, 255, 255)
-                            ImageButton.AnchorPoint = Vector2.new(0, 0)
-                            ImageButton.Parent = name_tab_tex
+                            local IconLabel = Instance.new("TextLabel")
+                            IconLabel.Name = "IconLabel"
+                            IconLabel.Size = UDim2.new(0, 74, 0, 61)
+                            IconLabel.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
+                            IconLabel.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                            IconLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                            IconLabel.BorderSizePixel = 0
+                            IconLabel.Text = "👁️"
+                            IconLabel.TextSize = 30
+                            IconLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+                            IconLabel.AnchorPoint = Vector2.new(0, 0)
+                            IconLabel.Parent = name_tab_tex
                         name_tab_tex.Parent = tab_visuals
                     tab_visuals.Parent = Name_tab
 
@@ -197,16 +199,18 @@ end
                             local UICorner_6 = Instance.new("UICorner")
                             UICorner_6.Parent = name_tab_tex_2
 
-                            local ImageButton_2 = Instance.new("ImageButton")
-                            ImageButton_2.Size = UDim2.new(0, 74, 0, 61)
-                            ImageButton_2.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
-                            ImageButton_2.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
-                            ImageButton_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
-                            ImageButton_2.BorderSizePixel = 0
-                            ImageButton_2.Image = "rbxassetid://101005170699126"
-                            ImageButton_2.ImageColor3 = Color3.fromRGB(255, 255, 255)
-                            ImageButton_2.AnchorPoint = Vector2.new(0, 0)
-                            ImageButton_2.Parent = name_tab_tex_2
+                            local IconLabel_2 = Instance.new("TextLabel")
+                            IconLabel_2.Name = "IconLabel"
+                            IconLabel_2.Size = UDim2.new(0, 74, 0, 61)
+                            IconLabel_2.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
+                            IconLabel_2.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
+                            IconLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+                            IconLabel_2.BorderSizePixel = 0
+                            IconLabel_2.Text = "🎮"
+                            IconLabel_2.TextSize = 30
+                            IconLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+                            IconLabel_2.AnchorPoint = Vector2.new(0, 0)
+                            IconLabel_2.Parent = name_tab_tex_2
                         name_tab_tex_2.Parent = tab_misc
                     tab_misc.Parent = Name_tab
 
@@ -235,15 +239,16 @@ end
                             local UICorner_7 = Instance.new("UICorner")
                             UICorner_7.Parent = name_tab_tex_3
 
-                            local icon_tab = Instance.new("ImageButton")
+                            local icon_tab = Instance.new("TextLabel")
                             icon_tab.Name = "icon_tab"
                             icon_tab.Size = UDim2.new(0, 74, 0, 61)
                             icon_tab.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
                             icon_tab.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
                             icon_tab.BorderColor3 = Color3.fromRGB(0, 0, 0)
                             icon_tab.BorderSizePixel = 0
-                            icon_tab.Image = "rbxassetid://105258813960131"
-                            icon_tab.ImageColor3 = Color3.fromRGB(255, 255, 255)
+                            icon_tab.Text = "⚙️"
+                            icon_tab.TextSize = 30
+                            icon_tab.TextColor3 = Color3.fromRGB(255, 255, 255)
                             icon_tab.AnchorPoint = Vector2.new(0, 0)
                             icon_tab.Parent = name_tab_tex_3
                         name_tab_tex_3.Parent = tab_settings
@@ -274,29 +279,31 @@ end
                             local UICorner_8 = Instance.new("UICorner")
                             UICorner_8.Parent = name_tab_tex_4
 
-                            local icon_tab_2 = Instance.new("ImageButton")
+                            local icon_tab_2 = Instance.new("TextLabel")
                             icon_tab_2.Name = "icon_tab"
                             icon_tab_2.Size = UDim2.new(0, 74, 0, 61)
                             icon_tab_2.Position = UDim2.new(0.1110016256570816, 0, -2.2083332538604736, 0)
                             icon_tab_2.BackgroundColor3 = Color3.fromRGB(45, 45, 44)
                             icon_tab_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
                             icon_tab_2.BorderSizePixel = 0
-                            icon_tab_2.Image = "rbxassetid://103785967336737"
-                            icon_tab_2.ImageColor3 = Color3.fromRGB(255, 255, 255)
+                            icon_tab_2.Text = "🎯"
+                            icon_tab_2.TextSize = 30
+                            icon_tab_2.TextColor3 = Color3.fromRGB(255, 255, 255)
                             icon_tab_2.AnchorPoint = Vector2.new(0, 0)
                             icon_tab_2.Parent = name_tab_tex_4
                         name_tab_tex_4.Parent = tab_aim
                     tab_aim.Parent = Name_tab
 
-                    local icon_tab_3 = Instance.new("ImageButton")
+                    local icon_tab_3 = Instance.new("TextLabel")
                     icon_tab_3.Name = "icon_tab"
                     icon_tab_3.Size = UDim2.new(0, 74, 0, 61)
                     icon_tab_3.Position = UDim2.new(0.09782608598470688, 0, -0.0026385225355625153, 0)
                     icon_tab_3.BackgroundColor3 = Color3.fromRGB(45, 44, 43)
                     icon_tab_3.BorderColor3 = Color3.fromRGB(45, 45, 44)
                     icon_tab_3.BorderSizePixel = 0
-                    icon_tab_3.Image = "rbxassetid://120332676651796"
-                    icon_tab_3.ImageColor3 = Color3.fromRGB(45, 45, 44)
+                    icon_tab_3.Text = "🏠"
+                    icon_tab_3.TextSize = 30
+                    icon_tab_3.TextColor3 = Color3.fromRGB(255, 255, 255)
                     icon_tab_3.AnchorPoint = Vector2.new(0, 0)
                     icon_tab_3.Parent = Name_tab
                 Name_tab.Parent = TabMenu
@@ -463,15 +470,37 @@ local function SwitchTab(tabName)
 end
 
 -- Connect tab buttons
-icon_tab_2.MouseButton1Click:Connect(function()
+-- Create invisible buttons for clicking
+local aimButton = Instance.new("TextButton")
+aimButton.Size = UDim2.new(1, 0, 1, 0)
+aimButton.BackgroundTransparency = 1
+aimButton.Text = ""
+aimButton.Parent = tab_aim
+aimButton.ZIndex = 100
+
+local visualsButton = Instance.new("TextButton")
+visualsButton.Size = UDim2.new(1, 0, 1, 0)
+visualsButton.BackgroundTransparency = 1
+visualsButton.Text = ""
+visualsButton.Parent = tab_visuals
+visualsButton.ZIndex = 100
+
+local miscButton = Instance.new("TextButton")
+miscButton.Size = UDim2.new(1, 0, 1, 0)
+miscButton.BackgroundTransparency = 1
+miscButton.Text = ""
+miscButton.Parent = tab_misc
+miscButton.ZIndex = 100
+
+aimButton.MouseButton1Click:Connect(function()
     SwitchTab("aimbot")
 end)
 
-ImageButton.MouseButton1Click:Connect(function()
+visualsButton.MouseButton1Click:Connect(function()
     SwitchTab("visuals")
 end)
 
-ImageButton_2.MouseButton1Click:Connect(function()
+miscButton.MouseButton1Click:Connect(function()
     SwitchTab("misc")
 end)
 
